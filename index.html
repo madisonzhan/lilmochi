@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Crunchling</title>
+<meta name="description" content="A virtual pet that grows when you do your bCourses work.">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cellipse cx='8' cy='9' rx='6' ry='6.5' fill='%23efc3d3'/%3E%3Crect x='5' y='6' width='6' height='5' rx='1' fill='%23cfdfe6'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Crunchling <span class="deco">⋆｡˚ ☁︎ ˚｡⋆</span></h1>
+    <p class="sub">˗ˏˋ a virtual pet for your bCourses week ˎˊ˗ every assignment you finish feeds it. Let deadlines slip and it makes a mess ♡</p>
+  </header>
+  <div id="notice" class="notice" hidden></div>
+  <div class="game">
+    <div class="pet-col">
+      <svg class="chain" viewBox="0 0 120 74" aria-hidden="true">
+        <g fill="#d9d9de" stroke="#a9a9b2" stroke-width=".8" id="beads"></g>
+        <rect x="55" y="62" width="10" height="7" rx="2" fill="#c9c9d0" stroke="#a9a9b2" stroke-width=".8"/>
+      </svg>
+      <div class="device-wrap" id="deviceWrap"><div class="device" id="device">
+        <span class="loop"></span>
+        <span class="doodle" style="left:46px;top:70px">✦</span>
+        <span class="doodle" style="right:44px;top:66px">☾</span>
+        <span class="doodle" style="left:30px;top:190px;font-size:13px">⋆</span>
+        <span class="doodle" style="right:30px;top:200px">❀</span>
+        <span class="doodle" style="left:58px;bottom:58px;font-size:12px">♡</span>
+        <span class="doodle" style="right:58px;bottom:56px;font-size:12px">✧</span>
+        <div class="brand">⋆ crunchling ⋆</div>
+        <div class="bezel">
+          <div class="lcd" id="lcd" aria-live="polite">
+            <div class="icons" aria-hidden="true"><span data-s="0">◕</span><span data-s="1">♥</span><span data-s="2">⏱︎</span><span data-s="3">★</span></div>
+            <div class="screen" id="screen"></div>
+          </div>
+        </div>
+        <div class="buttons">
+          <button id="bA" aria-label="Previous screen"></button>
+          <button id="bB" aria-label="Pet or select"></button>
+          <button id="bC" aria-label="Next screen"></button>
+        </div>
+        <div class="toast-layer" id="toasts"></div>
+      </div></div>
+      <div class="btn-hint">◂ screen · pet · screen ▸</div>
+      <div class="petname"><span aria-hidden="true">✿</span><input id="petName" maxlength="14" aria-label="Pet name" value="mochi"><span aria-hidden="true">✿</span></div>
+    </div>
+
+    <div class="quests">
+      <section id="onboard" class="onboard" hidden>
+        <h2>hatch your crunchling ✧</h2>
+        <p class="note">Connect your bCourses so your assignments become quests. Exams become boss fights.</p>
+        <ol>
+          <li>In bCourses, open <b>Account → Settings</b>.</li>
+          <li>Under <b>Approved Integrations</b>, click <b>+ New Access Token</b>. Purpose: <code>crunchling</code>. Set an <b>expiration date</b> (end of semester is good).</li>
+          <li>Copy the token and paste it here.</li>
+        </ol>
+        <form id="tokenForm" autocomplete="off">
+          <input type="password" id="tokenInput" placeholder="paste your bCourses access token" aria-label="bCourses access token" spellcheck="false" required>
+          <label class="rem"><input type="checkbox" id="remember"> remember on this device</label>
+          <p class="formerr" id="formErr" hidden></p>
+          <button class="go" type="submit" id="goBtn">connect ♡</button>
+        </form>
+        <p class="fine"><b>Where your token goes.</b> It stays in this browser. When the page syncs, it passes through a small read-only relay (needed because bCourses blocks other websites from calling it directly) and is never stored or logged. Only three read-only bCourses endpoints are allowed: your profile, your courses, and your to-do planner. You can delete the token anytime in bCourses settings. <a href="privacy.html">Privacy details</a></p>
+      </section>
+
+      <div id="gameUI" hidden>
+        <div class="hud" id="hud"></div>
+        <div class="syncbar" id="syncbar"></div>
+        <div id="strip" class="strip" role="tablist" aria-label="Days"></div>
+        <section id="day" role="tabpanel"></section>
+        <div class="bosses"><h3>✮ boss fights</h3><div class="bgrid" id="bosses"></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="footer">⋆˙⟡♡ you got this ♡⟡˙⋆</p>
+  <p class="foot-links">Not affiliated with UC Berkeley or Instructure. <a href="privacy.html">Privacy</a></p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
